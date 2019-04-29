@@ -1,6 +1,6 @@
 var promise  = fetch("https://fsd1.herokuapp.com/users/1/details");
 promise.then(res=>res.json())
-	   .then(d=>udateDOM(d.data))
+	   .then(d=> udateDOM(d.data))
 	   .catch(error=>console.log(error))
 
 var udateDOM = function(data){
@@ -14,19 +14,23 @@ var udateDOM = function(data){
 	followers.innerText = data.stats.followers;
 	var sidebarUserName = document.querySelectorAll('.UserName div  span strong')
 	sidebarUserName.forEach(d=>d.textContent=data.user_name);
-	var sidebarMailId = document.querySelectorAll('.UserName div  span:nth-child(2)')
+	var sidebarMailId = document.querySelectorAll('.UserName div span:nth-child(2)')
 	sidebarMailId.forEach(d=>d.textContent=data.user_email);
 	var username = document.querySelectorAll('.tweets-header p:nth-child(2)')
 	username.forEach(d=>d.textContent=data.user_name+',');
 	var eMail = document.querySelectorAll('.tweets-header p:nth-child(3)')
 	eMail.forEach(d=>d.textContent=data.user_email);
+	var prousername = document.querySelector('#sidebar2 div h3')
+	prousername.textContent = data.full_name;
+	var proeMail = document.querySelectorAll('#sidebar2 div:nth-child(3) p')
+	proeMail.forEach(d=>d.textContent=data.user_email);
 }
 
 
 var promise = fetch("https://fsd1.herokuapp.com/users/1/following/tweets");
 promise.then(res=>res.json())
-	   .then(d=>udatetweet(d.data))
-	   .catch(error=>cosole.log(error))
+	   .then(d=> udatetweet(d.data))
+	   .catch(error=>console.log(error))
 
 var udatetweet = function(data){
 	for (i=0;i<=1;i++){
